@@ -2,7 +2,7 @@ Numpad driver for Android Things
 ================================
 
 This driver supports numpad with 12 buttons.<br>
-![numpad12](https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/raw/08fdbd12154cdfeb2b7c93fa0d8f3efa5edd5c13/numpad/readme/numpad.jpg)
+![numpad12](https://raw.githubusercontent.com/Polidea/Polithings/master/numpad/readme/numpad.jpg)
 
 How to use the driver
 ---------------------
@@ -19,7 +19,7 @@ dependencies {
 ```
 
 ### Hardware Setup
-<img src="https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/raw/ba0ce3a6ff706d31a2d61f640e5cfb322328fee5/numpad/readme/numpad_wiring.jpg" width="342" height="389" /><br/>
+<img src="https://raw.githubusercontent.com/Polidea/Polithings/master/numpad/readme/numpad_wiring.jpg" width="342" height="389" /><br/>
 Every `GPIO` connected to row on a numpad MUST be [pulled-up](https://developer.android.com/things/hardware/hardware-101.html#pull-ups_and_pull-downs) to 3.3V
 
 

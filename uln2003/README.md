@@ -4,7 +4,7 @@ ULN2003 driver for Android Things
 This driver supports ULN2003 driver with 28BYJ-48 Stepper Motor.<br/>
 [This](http://42bots.com/tutorials/28byj-48-stepper-motor-with-uln2003-driver-and-arduino-uno/) tutorial helped us developing our driver.<br/>
 <br/>
-<img src="http://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/raw/941597d1c24d220d158788d8ca5199781cd9d2f1/uln2003/readme/ULN2003.jpg" width="298" height="293" />
+<img src="https://raw.githubusercontent.com/Polidea/Polithings/master/uln2003/readme/ULN2003.jpg" width="298" height="293" />
 
 How to use the driver
 ---------------------
