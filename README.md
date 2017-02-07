@@ -10,8 +10,8 @@ Implemented drivers
 -----------------------
 Driver | Type | dependecy definition| usage  
 :---:|:---:| --- | ---
-[ULN2003](uln2003) | stepper motor| `compile 'com.polidea.androidthings.driver:uln2003:0.0.1-SNAPSHOT'` | [tutorial](https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/tree/master/uln2003) [sample](https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/blob/master/app/src/main/kotlin/com/start/bootstrap/example/StepperMotorActivity.kt)
-[Numpad 12](numpad) | numpad with 12 buttons | `compile 'com.polidea.androidthings.driver:numpad12:0.0.1-SNAPSHOT'` | [tutorial](https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/tree/master/numpad) [sample](https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/blob/master/app/src/main/kotlin/com/start/bootstrap/MainActivity.kt) 
+[ULN2003](uln2003) | stepper motor| `compile 'com.polidea.androidthings.driver:uln2003:0.0.1-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/uln2003) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/StepperMotorActivity.kt)
+[Numpad 12](numpad) | numpad with 12 buttons | `compile 'com.polidea.androidthings.driver:numpad12:0.0.1-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/numpad) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/MainActivity.kt) 
 
 ## License
 
@@ -41,4 +41,4 @@ Driver | Type | dependecy definition| usage
 
 ## Maintained by
 
-[![Polidea](https://raw.githubusercontent.com/Polidea/RxAndroidBle/master/site/polidea_logo.png "Tailored software services including concept, design, development and testing")](http://www.polidea.com)
+[![Polidea](https://raw.githubusercontent.com/Polidea/Polithings/master/readme/polidea_logo.png "Tailored software services including concept, design, development and testing")](http://www.polidea.com)
