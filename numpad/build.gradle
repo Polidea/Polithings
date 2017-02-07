@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'groovyx.android'
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
+
+buildscript {
+
+    dependencies {
+        classpath rootProject.ext.kotlinPlugin
+    }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        test.java.srcDirs += 'src/test/groovy'
+
+    }
+
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+
+    androidGroovy {
+        options {
+            // We don't use groovy in production code so we'd like to disable Groovy processing.
+            configure { GroovyCompile task ->
+                task.enabled = task.name.contains("Test")
+                project.logger.info("Checking whether groovy should be enabled for $task.name: ->> $task.enabled\n")
+            }
+        }
+    }
+}
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    compile rootProject.ext.libs.kotlin
+    compile rootProject.ext.libs.appcompat
+    provided rootProject.ext.libs.android_things
+    testCompile rootProject.ext.libs.junit
+    testCompile rootProject.ext.libs.groovy
+    testCompile rootProject.ext.libs.spock
+    testCompile rootProject.ext.libs.mockito
+}

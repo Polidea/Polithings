@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.tmiyamon.config'
+
+def minSdk = { 24 }
+
+buildscript {
+
+    dependencies {
+        classpath rootProject.ext.kotlinPlugin
+    }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.start.bootstrap"
+        minSdkVersion minSdk()
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix '.debug'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest {
+            resources.srcDirs = ['src/androidTest/res']
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'MissingTranslation'
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+                exceptionFormat = 'full'
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+
+    compile project(':numpad')
+    compile project(':uln2003')
+    compile rootProject.ext.libs.kotlin
+    compile rootProject.ext.libs.appcompat
+    provided rootProject.ext.libs.android_things
+    testCompile rootProject.ext.libs.junit
+}

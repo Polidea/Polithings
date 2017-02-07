@@ -1,0 +1,51 @@
+apply from: 'dependencies.gradle'
+apply plugin: 'build-time-tracker'
+
+allprojects {
+    apply plugin: 'com.github.ben-manes.versions'
+
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
+    }
+
+    buildscript {
+
+        repositories {
+            jcenter()
+            maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
+        }
+    }
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.8.0'
+        classpath 'gradle.plugin.com.tmiyamon:gradle-config:0.2.1'
+        classpath files('gradle/groovy-android-gradle-plugin-1.0.1-SNAPSHOT.jar')
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+buildtimetracker {
+    reporters {
+        summary {
+            ordered false
+            threshold 50
+            barstyle "unicode"
+        }
+    }
+}
