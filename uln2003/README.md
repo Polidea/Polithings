@@ -10,11 +10,11 @@ How to use the driver
 ### Gradle dependency
 
 To use the `uln2003` driver, simply add the line below to your project's `build.gradle`,
-where `<version>` matches the last version of the driver available on TBD.
+where `<version>` matches the last version of the driver available on [maven central](https://mvnrepository.com/search?q=polidea).
 
 ```
 dependencies {
-    TBD
+    compile 'com.polidea.androidthings.driver:uln2003:<version>'
 }
 ```
 
