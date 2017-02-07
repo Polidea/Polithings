@@ -8,6 +8,9 @@ Every driver is published as separeate lib to maven repository.
 
 Implemented drivers
 -----------------------
+
+All samples work on Raspberry Pi 3 only.<br/>
+
 Driver | Type | dependecy definition| usage  
 :---:|:---:| --- | ---
 [ULN2003](uln2003) | stepper motor| `compile 'com.polidea.androidthings.driver:uln2003:0.0.1-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/uln2003) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/StepperMotorActivity.kt)

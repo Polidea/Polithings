@@ -18,7 +18,8 @@ dependencies {
 }
 ```
 
-### Connection
+### Hardware Setup
+<img src="https://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/raw/ba0ce3a6ff706d31a2d61f640e5cfb322328fee5/numpad/readme/numpad_wiring.jpg" width="342" height="389" /><br/>
 Every `GPIO` connected to row on a numpad MUST be [pulled-up](https://developer.android.com/things/hardware/hardware-101.html#pull-ups_and_pull-downs) to 3.3V
 
 
@@ -26,6 +27,16 @@ Every `GPIO` connected to row on a numpad MUST be [pulled-up](https://developer.
 
 ```kotlin
 import com.polidea.androidthings.driver.numpad.NumpadDriver
+
+// select gpio pins on your board for columns(c) and rows(r)
+
+val c1GpioPinName = "BCM27"
+val c2GpioPinName = "BCM17"
+val c3GpioPinName = "BCM22"
+val r1GpioPinName = "BCM12"
+val r2GpioPinName = "BCM21"
+val r3GpioPinName = "BCM20"
+val r4GpioPinName = "BCM16"
 
 // Access the Button and listen for events:
 

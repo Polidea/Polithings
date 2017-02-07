@@ -2,7 +2,9 @@ ULN2003 driver for Android Things
 ================================
 
 This driver supports ULN2003 driver with 28BYJ-48 Stepper Motor.<br/>
-[This](http://42bots.com/tutorials/28byj-48-stepper-motor-with-uln2003-driver-and-arduino-uno/) tutorial helped us developing our driver.
+[This](http://42bots.com/tutorials/28byj-48-stepper-motor-with-uln2003-driver-and-arduino-uno/) tutorial helped us developing our driver.<br/>
+<br/>
+<img src="http://gitlab2.polidea.com/pawel.byszewski/android_things_drivers/raw/941597d1c24d220d158788d8ca5199781cd9d2f1/uln2003/readme/ULN2003.jpg" width="298" height="293" />
 
 How to use the driver
 ---------------------
@@ -18,13 +20,20 @@ dependencies {
 }
 ```
 
-### Connection
-Connect all four "in" pins on uln2003 driver into GPIOs available on your board
+### Hardware Setup
+Connect all four "in" pins on uln2003 driver into GPIOs available on your board.
 
 ### Sample usage of high level Stepper Motor Driver
 
 ```kotlin
 com.polidea.androidthings.driver.uln2003.motor.ULN2003StepperMotor
+
+// select gpio pins on your board for uln2003 input pins
+
+val in1Pin = "BCM4"
+val in2Pin = "BCM17"
+val in3Pin = "BCM27"
+val in4Pin = "BCM22"
 
 val stepper = ULN2003StepperMotor(in1GpioId = in1Pin,
                                   in2GpioId = in2Pin,
@@ -58,6 +67,13 @@ Remember, if you close ULN2003StepperMotor during the execution process you'll b
 
 ```kotlin
 package com.polidea.androidthings.driver.uln2003.driver.ULN2003
+
+// select gpio pins on your board for uln2003 input pins
+
+val in1Pin = "BCM4"
+val in2Pin = "BCM17"
+val in3Pin = "BCM27"
+val in4Pin = "BCM22"
 
 val uln2003 = ULN2003(in1GpioId = in1Pin,
                       in2GpioId = in2Pin,

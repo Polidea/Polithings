@@ -9,13 +9,13 @@ class NumpadActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Numpad(c1GpioId = "BCM13",
-                c2GpioId = "BCM5",
-                c3GpioId = "BCM26",
-                r1GpioId = "BCM6",
+        Numpad(c1GpioId = "BCM27",
+                c2GpioId = "BCM17",
+                c3GpioId = "BCM22",
+                r1GpioId = "BCM12",
                 r2GpioId = "BCM21",
                 r3GpioId = "BCM20",
-                r4GpioId = "BCM19"
+                r4GpioId = "BCM16"
                 )
                 .apply {
             keyListener = { keyEvent ->
