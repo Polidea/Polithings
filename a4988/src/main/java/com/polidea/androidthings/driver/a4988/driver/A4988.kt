@@ -1,6 +1,8 @@
 package com.polidea.androidthings.driver.a4988.driver
 
 import com.polidea.androidthings.driver.a4988.Direction
+import com.polidea.androidthings.driver.a4988.awaiter.DefaultAwaiter
+import com.polidea.androidthings.driver.a4988.awaiter.Awaiter
 import com.polidea.androidthings.driver.a4988.gpio.A4988Gpio
 import com.polidea.androidthings.driver.a4988.gpio.GpioFactory
 
@@ -10,14 +12,15 @@ class A4988 internal constructor(private val stepGpioId: String,
                                  private val ms2GpioId: String?,
                                  private val ms3GpioId: String?,
                                  private val enGpioId: String?,
-                                 private val gpioFactory: GpioFactory) : AutoCloseable {
+                                 private val gpioFactory: GpioFactory,
+                                 private val awaiter: Awaiter) : AutoCloseable {
 
     constructor(stepGpioId: String) :
-            this(stepGpioId, null, null, null, null, null, GpioFactory())
+            this(stepGpioId, null, null, null, null, null, GpioFactory(), DefaultAwaiter())
 
     constructor(stepGpioId: String,
                 dirGpioId: String) :
-            this(stepGpioId, dirGpioId, null, null, null, null, GpioFactory())
+            this(stepGpioId, dirGpioId, null, null, null, null, GpioFactory(), DefaultAwaiter())
 
     constructor(stepGpioId: String,
                 dirGpioId: String?,
@@ -25,7 +28,7 @@ class A4988 internal constructor(private val stepGpioId: String,
                 ms2GpioId: String?,
                 ms3GpioId: String?,
                 enGpioId: String?) :
-            this(stepGpioId, dirGpioId, ms1GpioId, ms2GpioId, ms3GpioId, enGpioId, GpioFactory())
+            this(stepGpioId, dirGpioId, ms1GpioId, ms2GpioId, ms3GpioId, enGpioId, GpioFactory(), DefaultAwaiter())
 
     var direction = Direction.CLOCKWISE
         set(value) {
@@ -88,13 +91,17 @@ class A4988 internal constructor(private val stepGpioId: String,
     }
 
     fun performStep(stepPulseDuration: PulseDuration) {
+        if (enGpio != null && !enabled) {
+            throw Exception("A4988 is disabled. Enable it before performing a step.")
+        }
+
         val pulseDurationMillis = stepPulseDuration.millis / 2
         val pulseDurationNanos = stepPulseDuration.nanos / 2
 
         stepGpio.value = true
-        Thread.sleep(pulseDurationMillis, pulseDurationNanos)
+        awaiter.await(pulseDurationMillis, pulseDurationNanos)
         stepGpio.value = false
-        Thread.sleep(pulseDurationMillis, pulseDurationNanos)
+        awaiter.await(pulseDurationMillis, pulseDurationNanos)
     }
 
     private fun setDirectionOnBoard(direction: Direction) {
