@@ -1,8 +1,8 @@
 package com.polidea.androidthings.driver.a4988.driver
 
 import com.polidea.androidthings.driver.a4988.Direction
-import com.polidea.androidthings.driver.a4988.awaiter.DefaultAwaiter
 import com.polidea.androidthings.driver.a4988.awaiter.Awaiter
+import com.polidea.androidthings.driver.a4988.awaiter.DefaultAwaiter
 import com.polidea.androidthings.driver.a4988.gpio.A4988Gpio
 import com.polidea.androidthings.driver.a4988.gpio.GpioFactory
 
@@ -84,7 +84,7 @@ class A4988 internal constructor(private val stepGpioId: String,
         arrayOf(stepGpio, dirGpio, ms1Gpio, ms2Gpio, ms3Gpio).forEach {
             try {
                 it?.close()
-            } finally {
+            } catch (e: Exception) {
             }
         }
         gpiosOpened = false

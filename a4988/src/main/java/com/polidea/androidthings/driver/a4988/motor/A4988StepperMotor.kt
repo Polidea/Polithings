@@ -100,8 +100,8 @@ class A4988StepperMotor internal constructor(private val stepsPerRevolution: Int
     }
 
     companion object {
-        val CIRCLE_DEGREES = 360
-        val MINUTE_MILLIS = 60 * 1000
-        val NANOS_IN_SECOND = 1000000
+        private val CIRCLE_DEGREES = 360
+        private val MINUTE_MILLIS = 60 * 1000
+        private val NANOS_IN_SECOND = 1000000
     }
 }
