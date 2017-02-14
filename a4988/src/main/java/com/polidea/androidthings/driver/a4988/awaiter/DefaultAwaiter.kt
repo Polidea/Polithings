@@ -3,8 +3,10 @@ package com.polidea.androidthings.driver.a4988.awaiter
 class DefaultAwaiter(val busyAwaitThresholdMillis: Long = 2, val busyAwaitThresholdNanos: Int = 0) : Awaiter {
 
     override fun await(millis: Long, nanos: Int) {
-        if (millis < busyAwaitThresholdMillis ||
-                millis >= busyAwaitThresholdMillis && nanos < busyAwaitThresholdNanos) {
+        val exceedsThreshold = millis < busyAwaitThresholdMillis ||
+                millis >= busyAwaitThresholdMillis && nanos < busyAwaitThresholdNanos
+
+        if (exceedsThreshold) {
             busyAwait(millis, nanos)
         } else {
             sleep(millis, nanos)
@@ -24,6 +26,6 @@ class DefaultAwaiter(val busyAwaitThresholdMillis: Long = 2, val busyAwaitThresh
             = millis * NANOS_IN_MILLISECOND + nanos.toLong()
 
     companion object {
-        val NANOS_IN_MILLISECOND = 1000000L
+        private val NANOS_IN_MILLISECOND = 1000000L
     }
 }

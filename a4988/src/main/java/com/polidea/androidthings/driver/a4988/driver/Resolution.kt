@@ -7,13 +7,12 @@ enum class Resolution {
     EIGHT,
     SIXTEENTH;
 
-    fun getStepMultiplier(): Int {
-        when (this) {
-            FULL -> return 16
-            HALF -> return 8
-            QUARTER -> return 4
-            EIGHT -> return 2
-            SIXTEENTH -> return 1
-        }
-    }
+    fun getStepMultiplier()
+            = when (this) {
+                FULL -> 16
+                HALF -> 8
+                QUARTER -> 4
+                EIGHT -> 2
+                SIXTEENTH -> 1
+            }
 }
