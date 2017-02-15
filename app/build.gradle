@@ -77,9 +77,9 @@ kapt {
 }
 
 dependencies {
-
     compile project(':numpad')
     compile project(':uln2003')
+    compile project(':a4988')
     compile rootProject.ext.libs.kotlin
     compile rootProject.ext.libs.appcompat
     provided rootProject.ext.libs.android_things
