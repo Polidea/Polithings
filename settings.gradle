@@ -1,1 +1,1 @@
-include ':app', ':uln2003', ':numpad', ':a4988'
+include ':app', ':uln2003', ':numpad', ':a4988', ':steppermotor'
