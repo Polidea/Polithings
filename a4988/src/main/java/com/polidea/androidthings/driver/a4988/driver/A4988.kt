@@ -1,10 +1,12 @@
 package com.polidea.androidthings.driver.a4988.driver
 
-import com.polidea.androidthings.driver.a4988.Direction
-import com.polidea.androidthings.driver.a4988.awaiter.Awaiter
-import com.polidea.androidthings.driver.a4988.awaiter.DefaultAwaiter
-import com.polidea.androidthings.driver.a4988.gpio.A4988Gpio
-import com.polidea.androidthings.driver.a4988.gpio.GpioFactory
+import com.polidea.androidthings.driver.steppermotor.Direction
+import com.polidea.androidthings.driver.steppermotor.awaiter.Awaiter
+import com.polidea.androidthings.driver.steppermotor.awaiter.DefaultAwaiter
+import com.polidea.androidthings.driver.steppermotor.driver.StepDuration
+import com.polidea.androidthings.driver.steppermotor.driver.StepperMotorDriver
+import com.polidea.androidthings.driver.steppermotor.gpio.GpioFactory
+import com.polidea.androidthings.driver.steppermotor.gpio.StepperMotorGpio
 
 class A4988 internal constructor(private val stepGpioId: String,
                                  private val dirGpioId: String?,
@@ -13,7 +15,7 @@ class A4988 internal constructor(private val stepGpioId: String,
                                  private val ms3GpioId: String?,
                                  private val enGpioId: String?,
                                  private val gpioFactory: GpioFactory,
-                                 private val awaiter: Awaiter) : AutoCloseable {
+                                 private val awaiter: Awaiter) : StepperMotorDriver() {
 
     constructor(stepGpioId: String) :
             this(stepGpioId, null, null, null, null, null, GpioFactory(), DefaultAwaiter())
@@ -30,13 +32,13 @@ class A4988 internal constructor(private val stepGpioId: String,
                 enGpioId: String?) :
             this(stepGpioId, dirGpioId, ms1GpioId, ms2GpioId, ms3GpioId, enGpioId, GpioFactory(), DefaultAwaiter())
 
-    var direction = Direction.CLOCKWISE
+    override var direction = Direction.CLOCKWISE
         set(value) {
             setDirectionOnBoard(value)
             field = value
         }
 
-    var resolution = Resolution.SIXTEENTH
+    var resolution = A4988Resolution.SIXTEENTH
         set(value) {
             setResolutionOnBoard(value)
             field = value
@@ -48,16 +50,16 @@ class A4988 internal constructor(private val stepGpioId: String,
             field = value
         }
 
-    private lateinit var stepGpio: A4988Gpio
-    private var dirGpio: A4988Gpio? = null
-    private var ms1Gpio: A4988Gpio? = null
-    private var ms2Gpio: A4988Gpio? = null
-    private var ms3Gpio: A4988Gpio? = null
-    private var enGpio: A4988Gpio? = null
+    private lateinit var stepGpio: StepperMotorGpio
+    private var dirGpio: StepperMotorGpio? = null
+    private var ms1Gpio: StepperMotorGpio? = null
+    private var ms2Gpio: StepperMotorGpio? = null
+    private var ms3Gpio: StepperMotorGpio? = null
+    private var enGpio: StepperMotorGpio? = null
 
     private var gpiosOpened = false
 
-    fun open() {
+    override fun open() {
         if (gpiosOpened) {
             return
         }
@@ -76,7 +78,7 @@ class A4988 internal constructor(private val stepGpioId: String,
         }
 
         direction = Direction.CLOCKWISE
-        resolution = Resolution.SIXTEENTH
+        resolution = A4988Resolution.SIXTEENTH
         enabled = false
     }
 
@@ -90,13 +92,13 @@ class A4988 internal constructor(private val stepGpioId: String,
         gpiosOpened = false
     }
 
-    fun performStep(stepPulseDuration: PulseDuration) {
+    override fun performStep(stepDuration: StepDuration) {
         if (enGpio != null && !enabled) {
-            throw Exception("A4988 is disabled. Enable it before performing a step.")
+            throw Exception("A4988 is disabled. Enable it before performing a stepDuration.")
         }
 
-        val pulseDurationMillis = stepPulseDuration.millis / 2
-        val pulseDurationNanos = stepPulseDuration.nanos / 2
+        val pulseDurationMillis = stepDuration.millis / 2
+        val pulseDurationNanos = stepDuration.nanos / 2
 
         stepGpio.value = true
         awaiter.await(pulseDurationMillis, pulseDurationNanos)
@@ -111,13 +113,13 @@ class A4988 internal constructor(private val stepGpioId: String,
         }
     }
 
-    private fun setResolutionOnBoard(resolution: Resolution) {
-        when (resolution) {
-            Resolution.FULL -> setResolutionGpios(true, true, true)
-            Resolution.HALF -> setResolutionGpios(true, true, false)
-            Resolution.QUARTER -> setResolutionGpios(false, true, false)
-            Resolution.EIGHT -> setResolutionGpios(true, false, false)
-            Resolution.SIXTEENTH -> setResolutionGpios(false, false, false)
+    private fun setResolutionOnBoard(a4988Resolution: A4988Resolution) {
+        when (a4988Resolution) {
+            A4988Resolution.FULL -> setResolutionGpios(true, true, true)
+            A4988Resolution.HALF -> setResolutionGpios(true, true, false)
+            A4988Resolution.QUARTER -> setResolutionGpios(false, true, false)
+            A4988Resolution.EIGHT -> setResolutionGpios(true, false, false)
+            A4988Resolution.SIXTEENTH -> setResolutionGpios(false, false, false)
         }
     }
 
@@ -131,6 +133,6 @@ class A4988 internal constructor(private val stepGpioId: String,
         ms3Gpio?.value = ms3Value
     }
 
-    private fun String?.openGpio(): A4988Gpio?
-            = if (this != null) A4988Gpio(gpioFactory.openGpio(this)) else null
+    private fun String?.openGpio(): StepperMotorGpio?
+            = if (this != null) StepperMotorGpio(gpioFactory.openGpio(this)) else null
 }
