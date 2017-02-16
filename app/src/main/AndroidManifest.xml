@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".example.StepperMotorActivity">
+        <activity android:name=".example.ULN2003StepperMotorActivity">
         </activity>
         <activity android:name=".NumpadActivity">
         </activity>
