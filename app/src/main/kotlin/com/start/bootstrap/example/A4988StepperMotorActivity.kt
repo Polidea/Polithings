@@ -44,15 +44,15 @@ class A4988StepperMotorActivity : AppCompatActivity() {
                 rpm = 10.0,
                 rotationListener = object : RotationListener {
                     override fun onStarted() {
-                        Log.i(TAG, "first rotate started")
+                        Log.i(TAG, "first rotation started")
                     }
 
                     override fun onFinishedSuccessfully() {
-                        Log.i(TAG, "first rotate finished")
+                        Log.i(TAG, "first rotation finished")
                     }
 
-                    override fun onFinishedWithError(degreesToMove: Double, movedDegrees: Double, exception: Exception) {
-                        Log.e(TAG, "error, degrees to rotate: {$degreesToMove}  moved degrees: {$movedDegrees}")
+                    override fun onFinishedWithError(degreesToRotate: Double, rotatedDegrees: Double, exception: Exception) {
+                        Log.e(TAG, "error, degrees to rotate: {$degreesToRotate}  rotated degrees: {$rotatedDegrees}")
                     }
                 })
 
@@ -77,15 +77,15 @@ class A4988StepperMotorActivity : AppCompatActivity() {
                 rpm = 35.0,
                 rotationListener = object : RotationListener {
                     override fun onStarted() {
-                        Log.i(TAG, "last rotate started")
+                        Log.i(TAG, "last rotation started")
                     }
 
                     override fun onFinishedSuccessfully() {
-                        Log.i(TAG, "all moves finished")
+                        Log.i(TAG, "all rotations finished")
                     }
 
-                    override fun onFinishedWithError(degreesToMove: Double, movedDegrees: Double, exception: Exception) {
-                        Log.e(TAG, "error, degrees to rotate: {$degreesToMove}  moved degrees: {$movedDegrees}")
+                    override fun onFinishedWithError(degreesToRotate: Double, rotatedDegrees: Double, exception: Exception) {
+                        Log.e(TAG, "error, degrees to rotate: {$degreesToRotate}  rotated degrees: {$rotatedDegrees}")
                     }
                 })
     }
