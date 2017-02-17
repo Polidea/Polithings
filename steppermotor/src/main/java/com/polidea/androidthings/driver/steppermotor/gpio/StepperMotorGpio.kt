@@ -14,7 +14,7 @@ class StepperMotorGpio(val gpio: Gpio) : AutoCloseable {
             gpio.value = value
         }
         get()
-        = gpio.value
+            = gpio.value
 
     override fun close()
             = gpio.close()

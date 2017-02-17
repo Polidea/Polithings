@@ -9,22 +9,21 @@ enum class A4988Resolution(val id: Int) {
 
     fun getStepMultiplier()
             = when (this) {
-        FULL -> 16
-        HALF -> 8
-        QUARTER -> 4
-        EIGHT -> 2
-        SIXTEENTH -> 1
+                FULL -> 16
+                HALF -> 8
+                QUARTER -> 4
+                EIGHT -> 2
+                SIXTEENTH -> 1
     }
 
     companion object {
         fun getFromId(id: Int): A4988Resolution {
-            val resolution: A4988Resolution
-            when (id) {
-                Metadata.ID_FULL -> resolution = FULL
-                Metadata.ID_HALF -> resolution = HALF
-                Metadata.ID_QUARTER -> resolution = QUARTER
-                Metadata.ID_EIGHT -> resolution = EIGHT
-                Metadata.ID_SIXTEENTH -> resolution = SIXTEENTH
+            val resolution = when (id) {
+                Metadata.ID_FULL -> FULL
+                Metadata.ID_HALF -> HALF
+                Metadata.ID_QUARTER -> QUARTER
+                Metadata.ID_EIGHT -> EIGHT
+                Metadata.ID_SIXTEENTH -> SIXTEENTH
                 else -> throw IllegalArgumentException("Invalid resolution id: $id")
             }
 
@@ -32,7 +31,7 @@ enum class A4988Resolution(val id: Int) {
         }
     }
 
-    internal class Metadata {
+    private class Metadata {
         companion object {
             val ID_FULL = 1
             val ID_HALF = 2
