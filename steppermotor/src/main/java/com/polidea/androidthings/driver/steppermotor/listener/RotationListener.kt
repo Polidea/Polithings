@@ -7,6 +7,6 @@ interface RotationListener {
     fun onFinishedSuccessfully() {
     }
 
-    fun onFinishedWithError(degreesToMove: Double, movedDegrees: Double, exception: Exception) {
+    fun onFinishedWithError(degreesToRotate: Double, rotatedDegrees: Double, exception: Exception) {
     }
 }
