@@ -1,69 +1,49 @@
 package com.polidea.androidthings.driver.uln2003.motor
 
-import com.polidea.androidthings.driver.uln2003.*
+import com.polidea.androidthings.driver.steppermotor.Direction
+import com.polidea.androidthings.driver.steppermotor.motor.StepperMotor
 import com.polidea.androidthings.driver.uln2003.driver.ULN2003
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import com.polidea.androidthings.driver.uln2003.driver.ULN2003Resolution
 
-class ULN2003StepperMotor(in1GpioId: String, in2GpioId: String, in3GpioId: String, in4GpioId: String) : AutoCloseable {
+class ULN2003StepperMotor(in1GpioId: String,
+                          in2GpioId: String,
+                          in3GpioId: String,
+                          in4GpioId: String) : StepperMotor() {
 
-    private var uln2003: ULN2003
-    private var executor: ExecutorService
+    val uln2003: ULN2003
 
     init {
-        executor = Executors.newSingleThreadExecutor()
         uln2003 = ULN2003(in1GpioId, in2GpioId, in3GpioId, in4GpioId)
-        uln2003.open()
+        stepperMotorDriver = uln2003
+        stepperMotorDriver.open()
     }
 
-    fun move(angle: Double, direction: Direction, resolution: Resolution, stepInterval: Interval = Interval()) {
-        move(angle, direction, resolution, null, stepInterval)
-    }
+    private fun getResolution(resolutionId: Int)
+            = ULN2003Resolution.getFromId(resolutionId)
 
-    fun move(angle: Double, direction: Direction, resolution: Resolution, movementListener: MovementListener? = null, stepInterval: Interval = Interval()) {
-        if (angle < 0) {
-            throw IllegalArgumentException("angle less than 0: {$angle}")
-        }
+    override fun getStepsFromDegrees(degrees: Double, resolutionId: Int)
+            = (degrees / CIRCLE_DEGREES.toDouble() * getStepsPerRevolution(resolutionId).toDouble()).toInt()
 
-        val stepsPerRevolution = getStepsPerRevolution(resolution)
-        val stepsToPerform = getStepsForAngle(angle, stepsPerRevolution)
-        val motorRunner = ULN2003MotorRunner(uln2003, stepsToPerform, direction, resolution, stepInterval)
-        motorRunner.movementListener = object : ULN2003MotorRunner.MovementListener {
-            override fun onStarted() {
-                movementListener?.onStarted()
-            }
+    override fun getDegreesFromSteps(steps: Int, resolutionId: Int)
+            = steps.toDouble() * CIRCLE_DEGREES.toDouble() / getStepsPerRevolution(resolutionId).toDouble()
 
-            override fun onFinishedSuccessfully() {
-                movementListener?.onFinishedSuccessfully()
-            }
+    override fun getStepDurationMillisForRPM(rpm: Double, resolutionId: Int)
+            = MINUTE_MILLIS.toDouble() / getStepsPerRevolution(resolutionId).toDouble() / rpm
 
-            override fun onFinishedWithError(stepsToPerform: Int, performedSteps: Int, exception: Exception) {
-                movementListener?.onFinishedWithError(angle, getAngleFromSteps(performedSteps, stepsPerRevolution), exception)
-            }
-        }
-        executor.submit(motorRunner)
-    }
+    override fun getStepsPerRevolution(resolutionId: Int)
+            = if (getResolution(resolutionId) == ULN2003Resolution.FULL) HALF_STEPS_PER_REVOLUTION else FULL_STEPS_PER_REVOLUTION
 
-    override fun close() {
-        executor.shutdownNow()
-        uln2003.close()
-    }
+    override fun getExecutionDurationNanos(rpm: Double, resolutionId: Int, steps: Int)
+            = (getStepDurationMillisForRPM(rpm, resolutionId) * steps.toDouble() * NANOS_IN_SECOND.toDouble()).toLong()
 
-    private fun getStepsPerRevolution(resolution: Resolution)
-            = if (resolution == Resolution.FULL) HALF_STEPS_PER_REVOLUTION else FULL_STEPS_PER_REVOLUTION
-
-    private fun getStepsForAngle(angle: Double, stepsPerRevolution: Int)
-            = (angle / CIRCLE_DEGREES.toDouble() * stepsPerRevolution).toInt()
-
-    private fun getAngleFromSteps(steps: Int, stepsPerRevolution: Int)
-            = steps.toDouble() * CIRCLE_DEGREES.toDouble() / stepsPerRevolution
+    override fun getMotorRunner(stepsToPerform: Int, direction: Direction, resolutionId: Int, executionDurationNanos: Long)
+            = ULN2003MotorRunner(uln2003, stepsToPerform, direction, getResolution(resolutionId), executionDurationNanos)
 
     companion object {
         /**
          * @see <a href="http://42bots.com/tutorials/28byj-48-stepper-motor-with-uln2003-driver-and-arduino-uno/">28BYJ-48 Stepper Motor tutorial</a>
          */
-        val FULL_STEPS_PER_REVOLUTION = 4076
-        val HALF_STEPS_PER_REVOLUTION = FULL_STEPS_PER_REVOLUTION / 2
-        val CIRCLE_DEGREES = 360
+        val HALF_STEPS_PER_REVOLUTION = 4076
+        val FULL_STEPS_PER_REVOLUTION = HALF_STEPS_PER_REVOLUTION / 2
     }
 }

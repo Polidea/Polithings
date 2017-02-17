@@ -1,4 +1,4 @@
-package com.polidea.androidthings.driver.a4988.awaiter
+package com.polidea.androidthings.driver.steppermotor.awaiter
 
 interface Awaiter {
     fun await(millis: Long, nanos: Int)

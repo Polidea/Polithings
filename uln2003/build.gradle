@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':steppermotor')
     compile rootProject.ext.libs.appcompat
     compile rootProject.ext.libs.kotlin
     provided rootProject.ext.libs.android_things

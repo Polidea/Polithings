@@ -1,4 +1,4 @@
-package com.polidea.androidthings.driver.uln2003.gpio
+package com.polidea.androidthings.driver.steppermotor.gpio
 
 import com.google.android.things.pio.PeripheralManagerService
 

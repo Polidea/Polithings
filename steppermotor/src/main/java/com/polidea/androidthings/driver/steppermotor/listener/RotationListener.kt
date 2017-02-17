@@ -1,4 +1,4 @@
-package com.polidea.androidthings.driver.a4988.motor
+package com.polidea.androidthings.driver.steppermotor.listener
 
 interface RotationListener {
     fun onStarted() {
