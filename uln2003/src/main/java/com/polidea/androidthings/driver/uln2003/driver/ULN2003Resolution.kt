@@ -6,10 +6,9 @@ enum class ULN2003Resolution(val id: Int) {
 
     companion object {
         fun getFromId(id: Int): ULN2003Resolution {
-            val resolution: ULN2003Resolution
-            when (id) {
-                Metadata.ID_FULL -> resolution = FULL
-                Metadata.ID_HALF -> resolution = HALF
+            val resolution = when (id) {
+                Metadata.ID_FULL -> FULL
+                Metadata.ID_HALF -> HALF
                 else -> throw IllegalArgumentException("Invalid resolution id: $id")
             }
 
@@ -17,7 +16,7 @@ enum class ULN2003Resolution(val id: Int) {
         }
     }
 
-    internal class Metadata {
+    private class Metadata {
         companion object {
             val ID_FULL = 1
             val ID_HALF = 2
