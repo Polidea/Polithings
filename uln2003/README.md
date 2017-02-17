@@ -57,11 +57,11 @@ stepper.rotate(degrees = 180.0,
             }
         })
         
-// Close the ULN2003StepperMotor when all moves are finished. Otherwise close() will terminate current and pending moves.
+// Close the ULN2003StepperMotor when all moves are finished. Otherwise close() will terminate current and pending rotations.
 stepper.close()
 ```
 
-You can call `move` method multiple times. All tasks will be queued and invoked synchronously on a separate thread.<br/>
+You can call `rotate` method multiple times. All tasks will be queued and invoked synchronously on a separate thread.<br/>
 Remember, if you close ULN2003StepperMotor during the execution process you'll be notified about the error from the running task only.
 
 ### Sample usage of ULN2003
@@ -97,8 +97,7 @@ uln2003.performStep(StepDuration(1))
 uln2003.close()
 ```
 
-Performing a half step gives you higher resolution and torque but it's slower than a full step.<br/>
-To cover a full circle you should call `moveToNextHalfStep` method 4076 times according to tutorial mentioned above 
+Performing a half step gives you higher resolution and torque, but its maximum speed is lower than in a full step mode.<br/>
 
 ## License
 
