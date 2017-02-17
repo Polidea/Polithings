@@ -13,11 +13,11 @@ class A4988StepperMotorActivity : AppCompatActivity() {
     val TAG = "A4988StepperMotor"
 
     val stepsPerRevolution = 96
-    val stepPin = "BCM5"
-    val dirPin = "BCM6"
-    val ms1Pin = "BCM16"
-    val ms2Pin = "BCM20"
-    val ms3Pin = "BCM21"
+    val stepPin = "BCM20"
+    val dirPin = "BCM21"
+    val ms1Pin = "BCM5"
+    val ms2Pin = "BCM6"
+    val ms3Pin = "BCM19"
 
     private lateinit var stepper: A4988StepperMotor
 
