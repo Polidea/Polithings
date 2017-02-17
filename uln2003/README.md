@@ -40,23 +40,24 @@ val stepper = ULN2003StepperMotor(in1GpioId = in1Pin,
                                   in3GpioId = in3Pin,
                                   in4GpioId = in4Pin)
                                   
-//Perform a move and add movement listener
-
-stepper.move(angle = 180.0, direction = Direction.CLOCKWISE, resolution = Resolution.HALF, movementListener = object : OnMoveFinishedListener {
+//Perform a rotation and add rotation listener
+stepper.rotate(degrees = 180.0,
+        direction = Direction.CLOCKWISE,
+        resolutionId = ULN2003Resolution.HALF.id,
+        rpm = 2.5,
+        rotationListener = object : RotationListener {
             override fun onStarted() {
-                Log.i(TAG, "the move has started")
+                Log.i(TAG, "rotation started")
             }
             override fun onFinishedSuccessfully() {
-                Log.i(TAG, "the move has finished successfully")
+                Log.i(TAG, "rotation finished")
             }
-            override fun onFinishedWithError(angleToMove: Double, movedAngle: Double, exception: Exception) {
-                Log.e(TAG, "the move has finished with an error, angle to move: {$angleToMove}  moved angle: {$movedAngle}")
+            override fun onFinishedWithError(degreesToRotate: Double, rotatedDegrees: Double, exception: Exception) {
+                Log.e(TAG, "error, degrees to rotate: {$degreesToRotate}  rotated degrees: {$rotatedDegrees}")
             }
-        },
-        stepInterval = Interval(1, 500000))
+        })
         
-// Close the ULN2003StepperMotor when all moves are finished. Otherwise close() will terminate current and pending moves. 
-
+// Close the ULN2003StepperMotor when all moves are finished. Otherwise close() will terminate current and pending moves.
 stepper.close()
 ```
 
@@ -81,21 +82,18 @@ val uln2003 = ULN2003(in1GpioId = in1Pin,
                       in4GpioId = in4Pin)
                       
 // Open uln2003 gpios
-
 uln2003.open()
 
 //Set direction
-
 uln2003.direction = Direction.COUNTERCLOCKWISE
 
-//Perform full or half step
+//Set resolution
+uln2003.resolution = ULN2003Resolution.FULL
 
-uln2003.moveToNextHalfStep()
-Thread.sleep(1)
-uln2003.moveToNextHalfStep()
+//Perform a step
+uln2003.performStep(StepDuration(1))
 
 // Close the ULN2003 when finished. 
-
 uln2003.close()
 ```
 
