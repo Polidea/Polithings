@@ -10,7 +10,7 @@ How to use the driver
 ### Gradle dependency
 
 To use the `numpad` driver, simply add the line below to your project's `build.gradle`,
-where `<version>` matches the last version of the driver available on [maven central](https://mvnrepository.com/search?q=polidea).
+where `<version>` matches the last version of the driver available on [maven central](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.polidea.androidthings.driver%22).
 
 ```
 dependencies {
