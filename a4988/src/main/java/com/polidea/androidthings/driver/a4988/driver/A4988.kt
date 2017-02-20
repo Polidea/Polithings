@@ -83,7 +83,7 @@ class A4988 internal constructor(private val stepGpioId: String,
     }
 
     override fun close() {
-        arrayOf(stepGpio, dirGpio, ms1Gpio, ms2Gpio, ms3Gpio).forEach {
+        arrayOf(stepGpio, dirGpio, ms1Gpio, ms2Gpio, ms3Gpio, enGpio).forEach {
             try {
                 it?.close()
             } catch (e: Exception) {
