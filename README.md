@@ -13,8 +13,8 @@ All samples work on Raspberry Pi 3 only.<br/>
 
 Driver | Type | dependecy definition| usage  
 :---:|:---:| --- | ---
-[ULN2003](uln2003) | stepper motor| `compile 'com.polidea.androidthings.driver:uln2003:1.0.0-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/uln2003) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/ULN2003StepperMotorActivity.kt)
-[A4988](a4988) | stepper motor| `compile 'com.polidea.androidthings.driver:a4988:2.0.0-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/a4988) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/A4988StepperMotorActivity.kt)
+[ULN2003](uln2003) | stepper motor| `compile 'com.polidea.androidthings.driver:uln2003:2.0.0-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/uln2003) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/ULN2003StepperMotorActivity.kt)
+[A4988](a4988) | stepper motor| `compile 'com.polidea.androidthings.driver:a4988:1.0.0-SNAPSHOT'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/a4988) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/example/A4988StepperMotorActivity.kt)
 [Numpad 12](numpad) | numpad with 12 buttons | `compile 'com.polidea.androidthings.driver:numpad12:1.0.0'` | [tutorial](https://github.com/Polidea/Polithings/tree/master/numpad) [sample](https://github.com/Polidea/Polithings/blob/master/app/src/main/kotlin/com/start/bootstrap/MainActivity.kt) 
 
 ## License
