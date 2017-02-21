@@ -21,7 +21,7 @@ dependencies {
 
 ### Hardware Setup
 
-<img src="https://raw.githubusercontent.com/Polidea/Polithings/master/a4988/readme/A4988_wiring.jpg" width="580" height="410" />
+<img src="https://raw.githubusercontent.com/Polidea/Polithings/master/a4988/readme/a4988_wiring.jpg" width="580" height="410" />
 
 ### Sample usage of high level Stepper Motor Driver
 
