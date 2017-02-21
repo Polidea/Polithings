@@ -26,16 +26,6 @@ class ULN2003StepperMotorActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         stepper = ULN2003StepperMotor(in1Pin, in2Pin, in3Pin, in4Pin)
-        testStepper()
-    }
-
-    override fun onPause() {
-        stepper.close()
-        super.onPause()
-    }
-
-    private fun testStepper() {
-
         stepper.rotate(degrees = 60.0,
                 direction = Direction.CLOCKWISE,
                 resolutionId = ULN2003Resolution.FULL.id,
@@ -77,5 +67,10 @@ class ULN2003StepperMotorActivity : AppCompatActivity() {
                         Log.e(TAG, "error, degrees to rotate: {$degreesToRotate}  rotated degrees: {$rotatedDegrees}")
                     }
                 })
+    }
+
+    override fun onPause() {
+        stepper.close()
+        super.onPause()
     }
 }

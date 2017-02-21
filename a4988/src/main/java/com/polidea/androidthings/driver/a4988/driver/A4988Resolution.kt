@@ -14,21 +14,12 @@ enum class A4988Resolution(val id: Int) {
                 QUARTER -> 4
                 EIGHT -> 2
                 SIXTEENTH -> 1
-    }
-
-    companion object {
-        fun getFromId(id: Int): A4988Resolution {
-            val resolution = when (id) {
-                Metadata.ID_FULL -> FULL
-                Metadata.ID_HALF -> HALF
-                Metadata.ID_QUARTER -> QUARTER
-                Metadata.ID_EIGHT -> EIGHT
-                Metadata.ID_SIXTEENTH -> SIXTEENTH
-                else -> throw IllegalArgumentException("Invalid resolution id: $id")
             }
 
-            return resolution
-        }
+    companion object {
+        fun getFromId(id: Int): A4988Resolution =
+                values().firstOrNull { it.id == id } ?:
+                        throw IllegalArgumentException("Invalid resolution id: $id")
     }
 
     private class Metadata {

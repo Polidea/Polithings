@@ -28,16 +28,6 @@ class A4988StepperMotorActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         stepper = A4988StepperMotor(stepsPerRevolution, stepPin, dirPin, ms1Pin, ms2Pin, ms3Pin, null)
-        testStepper()
-    }
-
-    override fun onPause() {
-        stepper.close()
-        super.onPause()
-    }
-
-    private fun testStepper() {
-
         stepper.rotate(degrees = 60.0,
                 direction = Direction.CLOCKWISE,
                 resolutionId = A4988Resolution.FULL.id,
@@ -88,5 +78,10 @@ class A4988StepperMotorActivity : AppCompatActivity() {
                         Log.e(TAG, "error, degrees to rotate: {$degreesToRotate}  rotated degrees: {$rotatedDegrees}")
                     }
                 })
+    }
+
+    override fun onPause() {
+        stepper.close()
+        super.onPause()
     }
 }

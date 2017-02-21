@@ -5,15 +5,9 @@ enum class ULN2003Resolution(val id: Int) {
     HALF(Metadata.ID_HALF);
 
     companion object {
-        fun getFromId(id: Int): ULN2003Resolution {
-            val resolution = when (id) {
-                Metadata.ID_FULL -> FULL
-                Metadata.ID_HALF -> HALF
-                else -> throw IllegalArgumentException("Invalid resolution id: $id")
-            }
-
-            return resolution
-        }
+        fun getFromId(id: Int): ULN2003Resolution =
+                values().firstOrNull { it.id == id } ?:
+                        throw IllegalArgumentException("Invalid resolution id: $id")
     }
 
     private class Metadata {

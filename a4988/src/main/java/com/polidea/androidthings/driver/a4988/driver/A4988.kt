@@ -1,5 +1,6 @@
 package com.polidea.androidthings.driver.a4988.driver
 
+import android.util.Log
 import com.polidea.androidthings.driver.steppermotor.Direction
 import com.polidea.androidthings.driver.steppermotor.awaiter.Awaiter
 import com.polidea.androidthings.driver.steppermotor.awaiter.DefaultAwaiter
@@ -7,6 +8,7 @@ import com.polidea.androidthings.driver.steppermotor.driver.StepDuration
 import com.polidea.androidthings.driver.steppermotor.driver.StepperMotorDriver
 import com.polidea.androidthings.driver.steppermotor.gpio.GpioFactory
 import com.polidea.androidthings.driver.steppermotor.gpio.StepperMotorGpio
+import java.io.IOException
 
 class A4988 internal constructor(private val stepGpioId: String,
                                  private val dirGpioId: String?,
@@ -86,7 +88,8 @@ class A4988 internal constructor(private val stepGpioId: String,
         arrayOf(stepGpio, dirGpio, ms1Gpio, ms2Gpio, ms3Gpio, enGpio).forEach {
             try {
                 it?.close()
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Log.e(TAG, "Couldn't close a gpio correctly.", e.cause)
             }
         }
         gpiosOpened = false
@@ -94,7 +97,7 @@ class A4988 internal constructor(private val stepGpioId: String,
 
     override fun performStep(stepDuration: StepDuration) {
         if (enGpio != null && !enabled) {
-            throw Exception("A4988 is disabled. Enable it before performing a stepDuration.")
+            throw IllegalStateException("A4988 is disabled. Enable it before performing a stepDuration.")
         }
 
         val pulseDurationMillis = stepDuration.millis / 2
@@ -135,4 +138,8 @@ class A4988 internal constructor(private val stepGpioId: String,
 
     private fun String?.openGpio(): StepperMotorGpio?
             = if (this != null) StepperMotorGpio(gpioFactory.openGpio(this)) else null
+
+    companion object {
+        val TAG = "A4988"
+    }
 }
