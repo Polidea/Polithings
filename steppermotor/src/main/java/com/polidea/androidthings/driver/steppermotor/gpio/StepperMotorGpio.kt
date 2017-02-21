@@ -1,8 +1,8 @@
-package com.polidea.androidthings.driver.uln2003.gpio
+package com.polidea.androidthings.driver.steppermotor.gpio
 
 import com.google.android.things.pio.Gpio
 
-class ULN2003Gpio(val gpio: Gpio) : AutoCloseable {
+class StepperMotorGpio(val gpio: Gpio) : AutoCloseable {
 
     init {
         gpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)

@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+buildscript {
+
+    dependencies {
+        classpath rootProject.ext.kotlinPlugin
+    }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    compile rootProject.ext.libs.kotlin
+    provided rootProject.ext.libs.android_things
+}

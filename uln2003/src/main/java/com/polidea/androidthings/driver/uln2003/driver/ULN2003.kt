@@ -1,39 +1,40 @@
 package com.polidea.androidthings.driver.uln2003.driver
 
-import com.polidea.androidthings.driver.uln2003.Direction
-import com.polidea.androidthings.driver.uln2003.gpio.GpioFactory
-import com.polidea.androidthings.driver.uln2003.gpio.ULN2003Gpio
+import com.polidea.androidthings.driver.steppermotor.Direction
+import com.polidea.androidthings.driver.steppermotor.awaiter.Awaiter
+import com.polidea.androidthings.driver.steppermotor.awaiter.DefaultAwaiter
+import com.polidea.androidthings.driver.steppermotor.driver.StepDuration
+import com.polidea.androidthings.driver.steppermotor.driver.StepperMotorDriver
+import com.polidea.androidthings.driver.steppermotor.gpio.GpioFactory
+import com.polidea.androidthings.driver.steppermotor.gpio.StepperMotorGpio
 
 class ULN2003 internal constructor(private val in1GpioId: String,
                                    private val in2GpioId: String,
                                    private val in3GpioId: String,
                                    private val in4GpioId: String,
-                                   private val gpioFactory: GpioFactory) : AutoCloseable {
+                                   private val gpioFactory: GpioFactory,
+                                   private val awaiter: Awaiter) : StepperMotorDriver() {
 
-    constructor(in1GpioId: String,
-                in2GpioId: String,
-                in3GpioId: String,
-                in4GpioId: String) :
-            this(in1GpioId, in2GpioId, in3GpioId, in4GpioId, GpioFactory())
+    constructor(in1GpioId: String, in2GpioId: String, in3GpioId: String, in4GpioId: String) :
+            this(in1GpioId, in2GpioId, in3GpioId, in4GpioId, GpioFactory(), DefaultAwaiter())
 
-    var direction: Direction = Direction.CLOCKWISE
+    var resolution = ULN2003Resolution.HALF
 
-    private var in1: ULN2003Gpio? = null
-    private var in2: ULN2003Gpio? = null
-    private var in3: ULN2003Gpio? = null
-    private var in4: ULN2003Gpio? = null
+    private var in1: StepperMotorGpio? = null
+    private var in2: StepperMotorGpio? = null
+    private var in3: StepperMotorGpio? = null
+    private var in4: StepperMotorGpio? = null
 
     private var currentStepState = INITIAL_STATE
     private var gpiosOpened = false
 
-    fun moveToNextHalfStep() {
-        setNextHalfStepState()
+    override fun performStep(stepDuration: StepDuration) {
+        when (resolution) {
+            ULN2003Resolution.FULL -> setNextHalfStepState()
+            ULN2003Resolution.HALF -> setNextFullStepState()
+        }
         setActiveCoilsDependingOnCurrentStepState()
-    }
-
-    fun moveToNextFullStep() {
-        setNextFullStepState()
-        setActiveCoilsDependingOnCurrentStepState()
+        awaiter.await(stepDuration.millis, stepDuration.nanos)
     }
 
     private fun setActiveCoilsDependingOnCurrentStepState() {
@@ -113,16 +114,16 @@ class ULN2003 internal constructor(private val in1GpioId: String,
         in4?.value = in4State
     }
 
-    fun open() {
+    override fun open() {
         if (gpiosOpened) {
             return
         }
 
         try {
-            in1 = ULN2003Gpio(gpioFactory.openGpio(in1GpioId))
-            in2 = ULN2003Gpio(gpioFactory.openGpio(in2GpioId))
-            in3 = ULN2003Gpio(gpioFactory.openGpio(in3GpioId))
-            in4 = ULN2003Gpio(gpioFactory.openGpio(in4GpioId))
+            in1 = StepperMotorGpio(gpioFactory.openGpio(in1GpioId))
+            in2 = StepperMotorGpio(gpioFactory.openGpio(in2GpioId))
+            in3 = StepperMotorGpio(gpioFactory.openGpio(in3GpioId))
+            in4 = StepperMotorGpio(gpioFactory.openGpio(in4GpioId))
             gpiosOpened = true
         } catch (e: Exception) {
             close()
@@ -136,7 +137,7 @@ class ULN2003 internal constructor(private val in1GpioId: String,
         arrayOf(in1, in2, in3, in4).forEach {
             try {
                 it?.close()
-            } finally {
+            } catch (e: Exception) {
             }
         }
         gpiosOpened = false

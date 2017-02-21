@@ -1,7 +1,7 @@
 ext {
     supportVersion = '25.1.0'
     buildToolsVersionVariable = "25.0.0"
-    kotlinVersion = '1.1.0-beta-17'
+    kotlinVersion = '1.1.0-rc-91'
     kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     aptPlugin = 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     retrofitVersion = '2.1.0'

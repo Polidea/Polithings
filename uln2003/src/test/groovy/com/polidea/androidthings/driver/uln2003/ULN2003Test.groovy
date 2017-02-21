@@ -1,8 +1,12 @@
 package com.polidea.androidthings.driver.uln2003
 
 import com.google.android.things.pio.Gpio
+import com.polidea.androidthings.driver.steppermotor.Direction
+import com.polidea.androidthings.driver.steppermotor.awaiter.Awaiter
+import com.polidea.androidthings.driver.steppermotor.driver.StepDuration
+import com.polidea.androidthings.driver.steppermotor.gpio.GpioFactory
 import com.polidea.androidthings.driver.uln2003.driver.ULN2003
-import com.polidea.androidthings.driver.uln2003.gpio.GpioFactory
+import com.polidea.androidthings.driver.uln2003.driver.ULN2003Resolution
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -10,13 +14,14 @@ class ULN2003Test extends Specification {
 
     ULN2003 uln2003
     GpioFactory gpioFactory = Mock GpioFactory
+    Awaiter awaiter = Mock Awaiter
     def mock1 = Mock(Gpio)
     def mock2 = Mock(Gpio)
     def mock3 = Mock(Gpio)
     def mock4 = Mock(Gpio)
 
     void setup() {
-        uln2003 = new ULN2003("in1", "in2", "in3", "in4", gpioFactory)
+        uln2003 = new ULN2003("in1", "in2", "in3", "in4", gpioFactory, awaiter)
         openULN2003()
     }
 
@@ -38,9 +43,10 @@ class ULN2003Test extends Specification {
         given:
         uln2003.setDirection(Direction.CLOCKWISE)
         uln2003.currentStepState = stepState
+        uln2003.resolution = ULN2003Resolution.HALF
 
         when:
-        uln2003.moveToNextHalfStep()
+        uln2003.performStep(new StepDuration(0, 0))
 
         then:
         mock1.setValue(io1Value)
