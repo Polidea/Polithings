@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    compile project(':steppermotor')
+    compile rootProject.ext.libs.steppermotor_base
     compile rootProject.ext.libs.appcompat
     compile rootProject.ext.libs.kotlin
     provided rootProject.ext.libs.android_things

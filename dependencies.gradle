@@ -47,6 +47,7 @@ ext {
             databinding                  : 'com.android.databinding:baseLibrary:2.2.0-alpha6',
             multidex                     : 'com.android.support:multidex:1.0.1',
             stetho                       : 'com.facebook.stetho:stetho:1.4.1',
+            steppermotor_base            : 'com.polidea.androidthings.driver:steppermotor-base:1.0.0',
             findbugs                     : [group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'],
     ]
 }
