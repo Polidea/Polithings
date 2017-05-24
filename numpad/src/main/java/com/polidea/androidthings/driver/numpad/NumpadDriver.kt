@@ -1,6 +1,5 @@
 package com.polidea.androidthings.driver.numpad
 
-import android.util.Log
 import android.view.InputDevice
 import com.google.android.things.userdriver.InputDriver
 import com.google.android.things.userdriver.UserDriverManager
@@ -40,7 +39,7 @@ class NumpadDriver(private val c1GpioId: String,
     }
 
     private fun build(numpad: Numpad): InputDriver {
-        val inputDriver = InputDriver.builder(InputDevice.SOURCE_KEYBOARD)
+        val inputDriver = InputDriver.Builder(InputDevice.SOURCE_KEYBOARD)
                 .setName(DRIVER_NAME)
                 .setVersion(DRIVER_VERSION)
                 .setKeys(Numpad.Key.values().map { it.keyCode }.toIntArray())
