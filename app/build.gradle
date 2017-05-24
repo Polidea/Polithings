@@ -13,7 +13,7 @@ buildscript {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion rootProject.ext.buildToolsVersionVariable
     defaultConfig {
         applicationId "com.start.bootstrap"
         minSdkVersion minSdk()

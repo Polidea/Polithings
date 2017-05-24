@@ -1,13 +1,13 @@
 ext {
     supportVersion = '25.1.0'
-    buildToolsVersionVariable = "25.0.0"
-    kotlinVersion = '1.1.0-rc-91'
+    buildToolsVersionVariable = "25.0.3"
+    kotlinVersion = '1.1.2-4'
     kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     aptPlugin = 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     retrofitVersion = '2.1.0'
     libs = [
             /* Application dependencies */
-            android_things               : 'com.google.android.things:androidthings:0.1-devpreview',
+            android_things               : 'com.google.android.things:androidthings:0.4-devpreview',
             rxjava                       : 'io.reactivex:rxjava:1.1.8',
             rxandroid                    : 'io.reactivex:rxandroid:1.2.1',
             rxjava_proguard              : 'com.artemzin.rxjava:proguard-rules:1.1.8.0',
