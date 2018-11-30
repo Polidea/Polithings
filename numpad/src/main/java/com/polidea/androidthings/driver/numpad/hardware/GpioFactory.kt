@@ -1,10 +1,8 @@
 package com.polidea.androidthings.driver.numpad.hardware
 
-import com.google.android.things.pio.PeripheralManagerService
-
+import com.google.android.things.pio.PeripheralManager
 
 class GpioFactory {
-    fun openGpio(name: String)
-        = PeripheralManagerService().openGpio(name)
+    fun openGpio(name: String) = PeripheralManager.getInstance().openGpio(name)
 }
 

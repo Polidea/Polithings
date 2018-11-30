@@ -1,8 +1,7 @@
 package com.polidea.androidthings.driver.steppermotor.gpio
 
-import com.google.android.things.pio.PeripheralManagerService
+import com.google.android.things.pio.PeripheralManager
 
 open class GpioFactory {
-    open fun openGpio(name: String)
-            = PeripheralManagerService().openGpio(name)
+    open fun openGpio(name: String) = PeripheralManager.getInstance().openGpio(name)
 }

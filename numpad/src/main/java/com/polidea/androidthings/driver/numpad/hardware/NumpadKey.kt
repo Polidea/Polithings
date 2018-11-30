@@ -1,7 +1,7 @@
 package com.polidea.androidthings.driver.numpad.hardware
 
 import com.google.android.things.pio.Gpio
-import com.google.android.things.pio.PeripheralManagerService
+import com.google.android.things.pio.PeripheralManager
 import java.io.IOException
 
 
@@ -18,7 +18,7 @@ class NumpadKey : AutoCloseable {
         get() = mButtonGpio!!.value
 
     constructor(pin: String, logicLevel: LogicState) {
-        val pioService = PeripheralManagerService()
+        val pioService = PeripheralManager.getInstance()
         val buttonGpio = pioService.openGpio(pin)
         try {
             connect(buttonGpio, logicLevel)

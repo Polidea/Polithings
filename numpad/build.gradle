@@ -11,16 +11,16 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.ext.buildToolsVersionVariable
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,11 +32,9 @@ android {
 
     }
 
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
-
 
     androidGroovy {
         options {
@@ -48,16 +46,14 @@ android {
         }
     }
 }
-kapt {
-    generateStubs = true
-}
 
 dependencies {
-    compile rootProject.ext.libs.kotlin
-    compile rootProject.ext.libs.appcompat
-    provided rootProject.ext.libs.android_things
-    testCompile rootProject.ext.libs.junit
-    testCompile rootProject.ext.libs.groovy
-    testCompile rootProject.ext.libs.spock
-    testCompile rootProject.ext.libs.mockito
+    implementation rootProject.ext.libs.kotlin
+    implementation rootProject.ext.libs.appcompat
+    compileOnly rootProject.ext.libs.android_things
+    testImplementation rootProject.ext.libs.junit
+    testImplementation rootProject.ext.libs.groovy
+    testImplementation rootProject.ext.libs.spock
+    testImplementation rootProject.ext.libs.mockito
+    testImplementation rootProject.ext.libs.android_things
 }

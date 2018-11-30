@@ -49,11 +49,9 @@ class A4988Test extends Specification {
         mockDir.setValue(dirValue)
 
         where:
-        //@formatter:off
         direction                  || dirValue
         Direction.CLOCKWISE        || true
         Direction.COUNTERCLOCKWISE || false
-        //@formatter:on
     }
 
     @Unroll
@@ -67,14 +65,12 @@ class A4988Test extends Specification {
         mockMS3.setValue(ms3Value)
 
         where:
-        //@formatter:off
-        resolution                 || ms1Value | ms2Value | ms3Value
-        A4988Resolution.FULL       || true     | true     | true
-        A4988Resolution.HALF       || true     | true     | false
-        A4988Resolution.QUARTER    || false    | true     | false
-        A4988Resolution.EIGHT      || true     | false    | false
-        A4988Resolution.SIXTEENTH  || false    | false    | false
-        //@formatter:on
+        resolution                || ms1Value | ms2Value | ms3Value
+        A4988Resolution.FULL      || true     | true     | true
+        A4988Resolution.HALF      || true     | true     | false
+        A4988Resolution.QUARTER   || false    | true     | false
+        A4988Resolution.EIGHT     || true     | false    | false
+        A4988Resolution.SIXTEENTH || false    | false    | false
     }
 
     def "should perform step"() {

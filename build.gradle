@@ -5,34 +5,33 @@ allprojects {
     apply plugin: 'com.github.ben-manes.versions'
 
     repositories {
+        google()
         jcenter()
         maven { url "https://jitpack.io" }
-        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
     }
 
     buildscript {
-
         repositories {
+            google()
             jcenter()
-            maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
         }
     }
 }
 
-
 buildscript {
+
     repositories {
+        google()
         jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url "http://dl.bintray.com/kotlin/kotlin-eap-1.1/" }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
-        classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.8.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
+        classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.11.1'
         classpath 'gradle.plugin.com.tmiyamon:gradle-config:0.2.1'
-        classpath files('gradle/groovy-android-gradle-plugin-1.0.1-SNAPSHOT.jar')
+        classpath 'org.codehaus.groovy:groovy-android-gradle-plugin:2.0.0'
     }
 }
 

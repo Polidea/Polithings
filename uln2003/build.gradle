@@ -11,18 +11,17 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.ext.buildToolsVersionVariable
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -50,12 +49,13 @@ android {
 }
 
 dependencies {
-    compile rootProject.ext.libs.steppermotor_base
-    compile rootProject.ext.libs.appcompat
-    compile rootProject.ext.libs.kotlin
-    provided rootProject.ext.libs.android_things
-    testCompile rootProject.ext.libs.junit
-    testCompile rootProject.ext.libs.groovy
-    testCompile rootProject.ext.libs.spock
-    testCompile rootProject.ext.libs.mockito
+    implementation rootProject.ext.libs.steppermotor_base
+    implementation rootProject.ext.libs.appcompat
+    implementation rootProject.ext.libs.kotlin
+    compileOnly rootProject.ext.libs.android_things
+    testImplementation rootProject.ext.libs.junit
+    testImplementation rootProject.ext.libs.groovy
+    testImplementation rootProject.ext.libs.spock
+    testImplementation rootProject.ext.libs.mockito
+    testImplementation rootProject.ext.libs.android_things
 }

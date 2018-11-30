@@ -17,8 +17,8 @@ class NumpadTest extends Specification {
 
     void setup() {
         numpad = new Numpad("c1", "c2", "c3",
-                            "r1", "r2", "r3", "r4",
-                             columnFactory, rowFactory)
+                "r1", "r2", "r3", "r4",
+                columnFactory, rowFactory)
         columnFactory.create(_, _) >> column
         rowFactory.create(_, _) >> row
     }
@@ -91,20 +91,20 @@ class NumpadTest extends Specification {
         key == expectedKey
 
         where:
-        columnId        |   rowId       ||  expectedKey
-        Column.Id.C1    |   Row.Id.R1   ||  Numpad.Key.ONE
-        Column.Id.C1    |   Row.Id.R2   ||  Numpad.Key.FOUR
-        Column.Id.C1    |   Row.Id.R3   ||  Numpad.Key.SEVEN
-        Column.Id.C1    |   Row.Id.R4   ||  Numpad.Key.STAR
+        columnId     | rowId     || expectedKey
+        Column.Id.C1 | Row.Id.R1 || Numpad.Key.ONE
+        Column.Id.C1 | Row.Id.R2 || Numpad.Key.FOUR
+        Column.Id.C1 | Row.Id.R3 || Numpad.Key.SEVEN
+        Column.Id.C1 | Row.Id.R4 || Numpad.Key.STAR
 
-        Column.Id.C2    |   Row.Id.R1   ||  Numpad.Key.TWO
-        Column.Id.C2    |   Row.Id.R2   ||  Numpad.Key.FIVE
-        Column.Id.C2    |   Row.Id.R3   ||  Numpad.Key.EIGHT
-        Column.Id.C2    |   Row.Id.R4   ||  Numpad.Key.ZERO
+        Column.Id.C2 | Row.Id.R1 || Numpad.Key.TWO
+        Column.Id.C2 | Row.Id.R2 || Numpad.Key.FIVE
+        Column.Id.C2 | Row.Id.R3 || Numpad.Key.EIGHT
+        Column.Id.C2 | Row.Id.R4 || Numpad.Key.ZERO
 
-        Column.Id.C3    |   Row.Id.R1   ||  Numpad.Key.THREE
-        Column.Id.C3    |   Row.Id.R2   ||  Numpad.Key.SIX
-        Column.Id.C3    |   Row.Id.R3   ||  Numpad.Key.NINE
-        Column.Id.C3    |   Row.Id.R4   ||  Numpad.Key.HASH
+        Column.Id.C3 | Row.Id.R1 || Numpad.Key.THREE
+        Column.Id.C3 | Row.Id.R2 || Numpad.Key.SIX
+        Column.Id.C3 | Row.Id.R3 || Numpad.Key.NINE
+        Column.Id.C3 | Row.Id.R4 || Numpad.Key.HASH
     }
 }

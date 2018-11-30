@@ -1,4 +1,4 @@
-package com.start.bootstrap
+package com.polidea.polithings
 
 import spock.lang.Specification
 

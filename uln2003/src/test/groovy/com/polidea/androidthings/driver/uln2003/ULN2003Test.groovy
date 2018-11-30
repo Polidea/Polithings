@@ -55,7 +55,6 @@ class ULN2003Test extends Specification {
         mock4.setValue(io4Value)
 
         where:
-        //@formatter:off
         stepState             || io1Value | io2Value | io3Value | io4Value
         ULN2003.INITIAL_STATE || true     | false    | false    | false
         0                     || true     | true     | false    | false
@@ -66,7 +65,6 @@ class ULN2003Test extends Specification {
         5                     || false    | false    | false    | true
         6                     || true     | false    | false    | true
         7                     || true     | true     | false    | false
-        //@formatter:on
     }
 
     def openULN2003() {

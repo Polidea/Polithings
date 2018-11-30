@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.start.bootstrap">
+    package="com.polidea.polithings">
+
+    <uses-permission android:name="com.google.android.things.permission.USE_PERIPHERAL_IO" />
+    <uses-permission android:name="com.google.android.things.permission.MANAGE_INPUT_DRIVERS" />
 
     <application
         android:allowBackup="true"
@@ -9,27 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library android:name="com.google.android.things"/>
+        <uses-library android:name="com.google.android.things" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.polidea.polithings.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.IOT_LAUNCHER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.IOT_LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".example.ULN2003StepperMotorActivity">
-        </activity>
-        <activity android:name=".NumpadActivity">
-        </activity>
-        <activity android:name=".example.A4988StepperMotorActivity">
-        </activity>
+        <activity android:name="com.polidea.polithings.example.ULN2003StepperMotorActivity" />
+        <activity android:name="com.polidea.polithings.example.NumpadActivity" />
+        <activity android:name="com.polidea.polithings.example.A4988StepperMotorActivity" />
     </application>
 
 </manifest>

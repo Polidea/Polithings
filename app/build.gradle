@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.tmiyamon.config'
 
-def minSdk = { 24 }
-
 buildscript {
 
     dependencies {
@@ -12,12 +10,11 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.ext.buildToolsVersionVariable
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "com.start.bootstrap"
-        minSdkVersion minSdk()
-        targetSdkVersion 25
+        applicationId "com.polidea.polithings"
+        minSdkVersion 24
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -31,10 +28,6 @@ android {
         debug {
             applicationIdSuffix '.debug'
         }
-    }
-
-    dataBinding {
-        enabled true
     }
 
     sourceSets {
@@ -65,23 +58,14 @@ android {
             }
         }
     }
-
-    packagingOptions {
-        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
-        exclude 'META-INF/LICENSE'
-    }
-}
-
-kapt {
-    generateStubs = true
 }
 
 dependencies {
-    compile project(':numpad')
-    compile project(':uln2003')
-    compile project(':a4988')
-    compile rootProject.ext.libs.kotlin
-    compile rootProject.ext.libs.appcompat
-    provided rootProject.ext.libs.android_things
-    testCompile rootProject.ext.libs.junit
+    implementation project(':numpad')
+    implementation project(':uln2003')
+    implementation project(':a4988')
+    implementation rootProject.ext.libs.kotlin
+    implementation rootProject.ext.libs.appcompat
+    compileOnly rootProject.ext.libs.android_things
+    testImplementation rootProject.ext.libs.junit
 }

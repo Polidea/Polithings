@@ -10,16 +10,15 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.ext.buildToolsVersionVariable
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,11 +26,7 @@ android {
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
 dependencies {
-    compile rootProject.ext.libs.kotlin
-    provided rootProject.ext.libs.android_things
+    implementation rootProject.ext.libs.kotlin
+    compileOnly rootProject.ext.libs.android_things
 }
