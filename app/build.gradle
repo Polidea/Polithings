@@ -61,9 +61,9 @@ android {
 }
 
 dependencies {
-    implementation project(':numpad')
-    implementation project(':uln2003')
-    implementation project(':a4988')
+    implementation rootProject.ext.libs.uln2003
+    implementation rootProject.ext.libs.a4988
+    implementation rootProject.ext.libs.numpad12
     implementation rootProject.ext.libs.kotlin
     implementation rootProject.ext.libs.appcompat
     compileOnly rootProject.ext.libs.android_things

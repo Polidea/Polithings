@@ -21,5 +21,8 @@ ext {
             awaitility         : 'com.jayway.awaitility:awaitility-groovy:1.7.0',
             multidex           : 'com.android.support:multidex:1.0.3',
             steppermotor_base  : 'com.polidea.androidthings.driver:steppermotor-base:1.0.2',
+            uln2003            : 'com.polidea.androidthings.driver:uln2003:2.0.3',
+            a4988              : 'com.polidea.androidthings.driver:a4988:1.0.3',
+            numpad12           : 'com.polidea.androidthings.driver:numpad12:1.0.2',
     ]
 }
