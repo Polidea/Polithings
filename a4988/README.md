@@ -105,7 +105,7 @@ package com.polidea.androidthings.driver.a4988.driver.A4988
 
     MIT License
     
-    Copyright (c) 2017 Polidea Sp. z o.o
+    Copyright (c) 2018 Polidea Sp. z o.o
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
