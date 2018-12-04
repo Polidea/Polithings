@@ -1,7 +1,7 @@
 Android Things user-space drivers
 =================================
-Bunch of peripheral drivers for Android Things. 
-**This library is updated to the newest version of Android Things(1.0.5)**
+Bunch of peripheral drivers for Android Things.  
+**This library is updated to the newest version of Android Things(1.0.5)**  
 **We no longer support this library.**
 
 How to use the driver
